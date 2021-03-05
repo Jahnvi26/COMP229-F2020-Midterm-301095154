@@ -1,0 +1,70 @@
+<%- include ../partials/header.ejs %>
+
+<%- include ../partials/main_nav.ejs %>
+
+<!-- Content for the Add page -->
+
+<!-- ADD YOU CODE TO CREATE THE ADD PAGE -->
+
+
+<%- include ../partials/bottom_nav.ejs %> 
+
+<main class="container" style="margin-bottom: 5em;">
+    <div class="row">
+        <div class="offset-md-1 col-md-11">
+            <h1><%= title %></h1>
+            <br>
+            <form class="add">
+                <div class="form-group">
+                  <label for="title">Title</label>
+                  <input required name="title" type="text" class="form-control" id="title" aria-describedby="title">
+                 
+                </div>
+                <div class="form-group">
+                    <label for="author">Author</label>
+                    <input required name="author" type="text" class="form-control" id="author" aria-describedby="author">
+                  </div>
+                  <div class="form-group">
+                    <label for="author">Year</label>
+                    <input required name="year" type="number" class="form-control" id="year" aria-describedby="year">
+                  </div>
+                 
+                  <div class="form-group">
+                    <label for="price">Price</label>
+                    <input required name="price" type="number" class="form-control" id="price" aria-describedby="price">
+                  </div>
+                  <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea name="description" class="form-control" id="description" rows="3"></textarea>
+                  </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </form>
+
+        </div>
+    </div>
+    <script>
+const form = document.querySelector('.add');
+form.addEventListener('submit', function(event){
+   event.preventDefault();
+  let data= new FormData(form);
+  let obj={};
+  for (var pair of data.entries()) {
+  obj[`${pair[0]}`]=pair[1];
+}
+console.log(obj);
+fetch('http://localhost:3000/book-list/add', {
+  method: "POST",
+  body: JSON.stringify(obj),
+  headers: {"Content-type": "application/json; charset=UTF-8"}
+})
+.then(response => window.location=`${window.location.origin}/book-list`) 
+
+.catch(err => console.log(err));
+});
+
+
+    </script>
+    </main>
+
+
+<%- include ../partials/footer.ejs %>
