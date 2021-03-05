@@ -52,7 +52,7 @@ form.addEventListener('submit', function(event){
   obj[`${pair[0]}`]=pair[1];
 }
 console.log(obj);
-let addurl =window.location.host+"/book-list/add";
+let addurl =window.location.origin+"/book-list/add";
 fetch(addurl, {
   method: "POST",
   body: JSON.stringify(obj),
