@@ -42,7 +42,7 @@
 let tokens=window.location.href.split("/");
 let id=tokens[tokens.length -1]
 let obj={_id:id};
-fetch('http://localhost:3000/book-list/id/'+id, {
+fetch( `${window.location.host}/book-list/id/${id}` , {
   method: "GET"
 })
 .then(response => response.json())
@@ -68,7 +68,7 @@ form.addEventListener('submit', function(event){
   obj[`${pair[0]}`]=pair[1];
 }
 console.log(obj);
-fetch('http://localhost:3000/book-list/edit', {
+fetch( `${window.location.host}/book-list/edit` , {
   method: "PUT",
   body: JSON.stringify(obj),
   headers: {"Content-type": "application/json; charset=UTF-8"}
